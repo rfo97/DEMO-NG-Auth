@@ -12,7 +12,7 @@ export class AuthService extends BaseService {
     super(_http);
   }
 
-  login(data: AuthRequest): Observable<AuthResponse | null> {
+  login(data: AuthRequest): Observable<AuthResponse> {
     return this.post<AuthResponse, AuthRequest>(
       `${this.baseUrl}/login`,
       data
@@ -24,7 +24,7 @@ export class AuthService extends BaseService {
     );
   }
 
-  register(data: AuthRequest): Observable<AuthResponse | null> {
+  register(data: AuthRequest): Observable<AuthResponse> {
     return this.post<AuthResponse, AuthRequest>(
       `${this.baseUrl}/register`,
       data
