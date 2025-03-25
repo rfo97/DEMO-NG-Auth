@@ -1,0 +1,17 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+  <label for="email">Email:</label>
+  <input type="text" id="email" formControlName="email" />
+  <app-form-error
+    [control]="registerForm.get('email')"
+    fieldName="Email"
+  ></app-form-error>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" formControlName="password" />
+  <app-form-error
+    [control]="registerForm.get('password')"
+    fieldName="Password"
+  ></app-form-error>
+
+  <button type="submit" [disabled]="registerForm.invalid">Register</button>
+</form>
