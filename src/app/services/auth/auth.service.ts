@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { BaseService } from '../base/base.service';
 import { AuthRequest, AuthResponse } from '../../interfaces/auth/auth';
 
@@ -19,7 +19,7 @@ export class AuthService extends BaseService {
     ).pipe(
       catchError((error) => {
         console.error('Login failed:', error);
-        return of(null);
+        return throwError(() => error);
       })
     );
   }
@@ -31,7 +31,7 @@ export class AuthService extends BaseService {
     ).pipe(
       catchError((error) => {
         console.error('Registration failed:', error);
-        return of(null);
+        return throwError(() => error);
       })
     );
   }
