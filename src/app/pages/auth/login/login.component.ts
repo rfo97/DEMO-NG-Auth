@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { FormErrorComponent } from '../../../shared/form-error/form-error.component';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ import { FormErrorComponent } from '../../../shared/form-error/form-error.compon
 export class LoginComponent {
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService : AuthService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -25,5 +26,13 @@ export class LoginComponent {
 
   onSubmit() {
     console.log('Form Data:', this.loginForm.value);
+    if(this.loginForm){
+      this.authService.login({
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password
+      }).subscribe(()=>{
+        console.log("successful subscribe")
+      })
+    }
   }
 }
