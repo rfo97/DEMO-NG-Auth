@@ -14,7 +14,7 @@ export class NotesService extends BaseService {
   constructor(_http: HttpClient) {
     super(_http);
   }
-
+  selectedNote!: Note
   getNotes(): Observable<Note[]> {
     return this.get<Note[]>(
       `${this.baseUrl}/notes`,
@@ -27,8 +27,8 @@ export class NotesService extends BaseService {
   }
 
 
-  getNoteById(id:number){
-    return  this.get<Note[]>(
+  getNoteById1(id:string): Observable<Note[]>{
+    return this.get<Note[]>(
       `${this.baseUrl}/notes/id`,
     ).pipe(
       catchError((error) => {
@@ -37,6 +37,10 @@ export class NotesService extends BaseService {
       })
     );
 
+  }
+
+  getNoteById(id: string): Observable<any> {
+    return this.get(`${this.baseUrl}/notes/${id}`);
   }
 
   // register(data: FormData): Observable<AuthResponse> {

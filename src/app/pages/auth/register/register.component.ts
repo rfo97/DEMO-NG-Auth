@@ -9,6 +9,8 @@ import { FormErrorComponent } from '../../../shared/form-error/form-error.compon
 import { AuthService } from '../../../services/auth/auth.service';
 import { AuthResponse } from '../../../interfaces/auth/auth';
 import { TokenService } from '../../../services/token/token.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +23,8 @@ export class RegisterComponent {
 
   constructor(private fb: FormBuilder,
     private authService: AuthService,
-    private tokenService: TokenService) {
+    private tokenService: TokenService,
+    private router: Router) {
     this.registerForm = this.fb.group({
       name: [''],
       email: ['', [Validators.required, Validators.email]],
@@ -41,7 +44,8 @@ export class RegisterComponent {
       const fileName = file.name;
       console.log('Selected file name:', fileName);
       const formdata = new FormData();
-      formdata.append("image", `http://task-react-auth-backend.eapi.joincoded.com/${fileName}`);
+      // formdata.append("image", `http://task-react-auth-backend.eapi.joincoded.com/${fileName}`);
+      formdata.append("image", `media/${fileName}`);
       formdata.append("name", this.registerForm.value.name);
       formdata.append("email", this.registerForm.value.email);
       formdata.append("password", this.registerForm.value.password);
@@ -50,6 +54,29 @@ export class RegisterComponent {
         console.log("Response: ", response)
         if(response){
           this.tokenService.setToken(response.token)
+
+          const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer);
+                  toast.addEventListener('mouseleave', Swal.resumeTimer);
+                }
+                
+              });
+        //console.log("successful subscribe")
+        Toast.fire({
+          icon: 'success',
+          title: 'Registration Successful! Please log in'
+        });
+        this.router.navigate(['/login'])
+
+
+
+          
         }
       })
 

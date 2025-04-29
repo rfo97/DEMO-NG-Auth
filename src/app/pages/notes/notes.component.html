@@ -1,9 +1,31 @@
+<div class="container">
+<form class="d-flex" (ngSubmit)="getNoteById()">
+  <input class="form-control me-2"
+         type="search"
+         placeholder="Search Note by ID"
+         aria-label="Search"
+         [(ngModel)]="noteId"
+         name="noteId">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+  
   @if(notes.length == 0){
     <div class="alert alert-info">
       No notes available.
     </div>
   }
+  
 
-@for(note of notes; track note.__id){
-  <app-note-details [note]="note"></app-note-details>
-}
+  <!-- <div class="row"> -->
+    <!-- @if(noteFound){ -->
+      <!-- <button class="btn btn-secondary" onclick="history.back()">Back</button> -->
+    <!-- } -->
+      <!-- <h3>Notes</h3> -->
+      @for(note of notes; track note.__id){
+        <app-note-details [note]="note"></app-note-details>
+      }      
+   
+  <!-- </div> -->
+</div>
+
+

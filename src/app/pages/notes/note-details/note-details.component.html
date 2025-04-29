@@ -1,11 +1,3 @@
-<!-- <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">{{ note.title }}</h5>
-    <p class="card-text">{{ note.body }}</p>
-  </div>
-</div> -->
-
-
 <div class="container py-5">
   <div class="col-md-9 border px-5 py-4 mx-auto d-sm-flex align-items-center">
     <div class="row">
@@ -17,7 +9,13 @@
             <h4>{{ note.user.name }}</h4>
             <p class="text-primary">{{note.title}}</p>
             <p class="text-secondary">{{note.body}}</p>
+            <p class="text-secondary">{{note.topic}}</p>
         </div>
+        @if(selectednote){
+          <button class="btn btn-secondary" (click)="goBack()">Back</button>
+        }
     </div>
   </div>
 </div>
+
+

@@ -38,7 +38,7 @@ export class AuthService extends BaseService {
 
   getAllUsers(): Observable<AuthRequest[]> {
      return this.get<AuthRequest[]>(
-       `${this.baseUrl}/users`,
+       `${this.baseUrl}/auth/users`,
      ).pipe(
        catchError((error) => {
          console.error('getAllUsers() failed:', error);

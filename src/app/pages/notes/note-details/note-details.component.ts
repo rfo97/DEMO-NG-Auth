@@ -3,6 +3,7 @@ import { NotesService } from '../../../services/notes/notes.service';
 import { Note } from '../../../interfaces/note/note';
 import { AuthService } from '../../../services/auth/auth.service';
 import { AuthRequest } from '../../../interfaces/auth/auth';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-note-details',
@@ -11,11 +12,16 @@ import { AuthRequest } from '../../../interfaces/auth/auth';
   styleUrl: './note-details.component.css'
 })
 export class NoteDetailsComponent {
-
+  BASE_URL: string = "http://task-react-auth-backend.eapi.joincoded.com/"
+  selectednote: any;
   constructor(private noteService: NotesService,
-    private authService: AuthService
+    private authService: AuthService, 
+    private route: ActivatedRoute,
+    private router: Router
   ){
-
+    this.noteService.getNotes().subscribe((response: Note[])=>{
+      this.notes = response
+    })
     }
     notes!: Note[]
     users!: AuthRequest[]
@@ -25,14 +31,15 @@ export class NoteDetailsComponent {
       this.noteService.getNotes().subscribe((response: Note[])=>{
         this.notes = response
       })
-
-      this.authService.getAllUsers().subscribe((response: AuthRequest[])=> {
-        this.users = response
-      })
+      this.selectednote = this.noteService.selectedNote;
+    
+      if (!this.note) {
+        const id = this.route.snapshot.paramMap.get('id') ?? "";
+        this.noteService.getNoteById(id).subscribe(data => this.note = data);
+      }
     }
 
-    // onSubmit(){
-    //   this.noteService.getNoteById()
-    // }
-
+    goBack(){
+      this.router.navigate(['/notes']);
+    }
 }

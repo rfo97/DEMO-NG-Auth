@@ -9,12 +9,12 @@ import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/rou
 })
 export class AppComponent {
   title = 'auth-app';
-  @Output() note! =
+ // @Output() note! 
 
-  navi! : any
-  constructor(private router: Router) {
-    const nav = this.router.getCurrentNavigation();
-    this.navi = nav?.extractedUrl; // receive the email state sent on successful login
-  }
+  // navi! : any
+  //constructor(private router: Router) {
+  //  const nav = this.router.getCurrentNavigation();
+   // this.navi = nav?.extractedUrl; // receive the email state sent on successful login
+ // }
 
 }
