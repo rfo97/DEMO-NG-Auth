@@ -1,0 +1,9 @@
+  @if(notes.length == 0){
+    <div class="alert alert-info">
+      No notes available.
+    </div>
+  }
+
+@for(note of notes; track note.__id){
+  <app-note-details [note]="note"></app-note-details>
+}

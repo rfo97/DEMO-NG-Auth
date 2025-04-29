@@ -35,4 +35,15 @@ export class AuthService extends BaseService {
       })
     );
   }
+
+  getAllUsers(): Observable<AuthRequest[]> {
+     return this.get<AuthRequest[]>(
+       `${this.baseUrl}/users`,
+     ).pipe(
+       catchError((error) => {
+         console.error('getAllUsers() failed:', error);
+         return throwError(() => error);
+       })
+     );
+   }
 }

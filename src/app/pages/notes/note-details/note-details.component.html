@@ -1,0 +1,23 @@
+<!-- <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ note.title }}</h5>
+    <p class="card-text">{{ note.body }}</p>
+  </div>
+</div> -->
+
+
+<div class="container py-5">
+  <div class="col-md-9 border px-5 py-4 mx-auto d-sm-flex align-items-center">
+    <div class="row">
+      <div class="row">
+        <img style="width: 100px; height: 100px; border-radius: 50%; border: 5px solid #e28f09;" [src]="`http://task-react-auth-backend.eapi.joincoded.com/${note.user.image}`" alt="">
+      </div>
+        <div>
+            <span style="font-weight: 600; color: #9B5DE5;">Author</span>
+            <h4>{{ note.user.name }}</h4>
+            <p class="text-primary">{{note.title}}</p>
+            <p class="text-secondary">{{note.body}}</p>
+        </div>
+    </div>
+  </div>
+</div>
